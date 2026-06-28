@@ -1,0 +1,221 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Revit AI - Bino Generatori"
+        Width="760" Height="660"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F0F4F8">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="lbl">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="#444444"/>
+            <Setter Property="Margin" Value="0,4,0,1"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="inp">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Padding" Value="3,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderBrush" Value="#BBBBBB"/>
+        </Style>
+        <Style TargetType="ComboBox" x:Key="cmb">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel>
+
+        <!-- HEADER -->
+        <Border Background="#2E4DA7" Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="REVIT AI  -  BINO GENERATORI"
+                    FontSize="16" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" Margin="0,0,12,0">
+                    <TextBlock Text="Loyiha nomi:" Foreground="#99BBFF" FontSize="9"/>
+                    <TextBox Name="loyiha_nomi" Width="160" Height="22" FontSize="11"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Muhandis:" Foreground="#99BBFF" FontSize="9"/>
+                    <TextBox Name="muhandis_nomi" Width="130" Height="22" FontSize="11"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ELEMENT PARAMETRLARI -->
+        <Grid Margin="6,4,6,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- FUNDAMENT -->
+            <Border Grid.Column="0" Margin="3" BorderBrush="#2E4DA7" BorderThickness="1.5" CornerRadius="4" Padding="8,6" Background="White">
+                <StackPanel>
+                    <TextBlock Text="FUNDAMENT" FontWeight="Bold" FontSize="12" Foreground="#2E4DA7" Margin="0,0,0,4"/>
+                    <TextBlock Text="Turi:" Style="{StaticResource lbl}"/>
+                    <ComboBox Name="fund_turi" Style="{StaticResource cmb}"
+                              SelectionChanged="fund_turi_SelectionChanged">
+                        <ComboBoxItem Content="Lentochny" IsSelected="True"/>
+                        <ComboBoxItem Content="Monolit tekis"/>
+                    </ComboBox>
+                    <TextBlock Text="Beton markasi:" Style="{StaticResource lbl}"/>
+                    <TextBox Name="fund_beton" Text="B20" Style="{StaticResource inp}"/>
+                    <StackPanel Name="lenta_params">
+                        <TextBlock Text="Podushka eni (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="podushka_eni" Text="1000" Style="{StaticResource inp}"/>
+                        <TextBlock Text="Podushka qalinligi (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="podushka_qalinligi" Text="400" Style="{StaticResource inp}"/>
+                        <TextBlock Text="Lenta eni (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="lenta_eni" Text="400" Style="{StaticResource inp}"/>
+                        <TextBlock Text="Lenta balandligi (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="lenta_balandligi" Text="600" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Name="monolit_params" Visibility="Collapsed">
+                        <TextBlock Text="Qalinligi (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="monolit_qalinligi" Text="400" Style="{StaticResource inp}"/>
+                        <TextBlock Text="Chiqish (mm):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="monolit_chiqish" Text="500" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- KOLONNA -->
+            <Border Grid.Column="1" Margin="3" BorderBrush="#2E4DA7" BorderThickness="1.5" CornerRadius="4" Padding="8,6" Background="White">
+                <StackPanel>
+                    <TextBlock Text="KOLONNA" FontWeight="Bold" FontSize="12" Foreground="#2E4DA7" Margin="0,0,0,4"/>
+                    <TextBlock Text="Olcham (mm):" Style="{StaticResource lbl}"/>
+                    <TextBox Name="kolonna_olcham" Text="400x400" Style="{StaticResource inp}"/>
+                    <TextBlock Text="Beton markasi:" Style="{StaticResource lbl}"/>
+                    <TextBox Name="kolonna_beton" Text="B25" Style="{StaticResource inp}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- RIGEL -->
+            <Border Grid.Column="2" Margin="3" BorderBrush="#2E4DA7" BorderThickness="1.5" CornerRadius="4" Padding="8,6" Background="White">
+                <StackPanel>
+                    <TextBlock Text="RIGEL" FontWeight="Bold" FontSize="12" Foreground="#2E4DA7" Margin="0,0,0,4"/>
+                    <TextBlock Text="Olcham (mm):" Style="{StaticResource lbl}"/>
+                    <TextBox Name="rigel_olcham" Text="400x600" Style="{StaticResource inp}"/>
+                    <TextBlock Text="Beton markasi:" Style="{StaticResource lbl}"/>
+                    <TextBox Name="rigel_beton" Text="B25" Style="{StaticResource inp}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- PEREKRITIE -->
+            <Border Grid.Column="3" Margin="3" BorderBrush="#2E4DA7" BorderThickness="1.5" CornerRadius="4" Padding="8,6" Background="White">
+                <StackPanel>
+                    <TextBlock Text="PEREKRITIE" FontWeight="Bold" FontSize="12" Foreground="#2E4DA7" Margin="0,0,0,4"/>
+                    <TextBlock Text="Turi:" Style="{StaticResource lbl}"/>
+                    <ComboBox Name="plita_turi" Style="{StaticResource cmb}">
+                    <StackPanel Name="pk_params" Visibility="Collapsed">
+                    <TextBlock Text="PK eni (mm):" Style="{StaticResource lbl}"/>
+                    <TextBox Name="pk_eni" Text="1200" Style="{StaticResource inp}"/>
+                    <TextBlock Text="Tayanchga otirish (mm):" Style="{StaticResource lbl}"/>
+                    <TextBox Name="tayanchiq" Text="130" Style="{StaticResource inp}"/>
+                </StackPanel>
+                        <ComboBoxItem Content="Monolit" IsSelected="True"/>
+                        <ComboBoxItem Content="PK (Pustotniy)"/>
+                    </ComboBox>
+                    <TextBlock Text="Qalinligi (mm):" Style="{StaticResource lbl}"/>
+                    <TextBox Name="plita_qalinligi" Text="200" Style="{StaticResource inp}"/>
+                    <TextBlock Text="Beton markasi:" Style="{StaticResource lbl}"/>
+                    <TextBox Name="plita_beton" Text="B20" Style="{StaticResource inp}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- BINO PARAMETRLARI -->
+        <Border Margin="6,4,6,0" BorderBrush="#2E4DA7" BorderThickness="1.5" CornerRadius="4" Padding="8,6" Background="White">
+            <StackPanel>
+                <TextBlock Text="BINO PARAMETRLARI" FontWeight="Bold" FontSize="12" Foreground="#2E4DA7" Margin="0,0,0,4"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="3,0">
+                        <TextBlock Text="Eni (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="bino_eni" Text="12" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="3,0">
+                        <TextBlock Text="Uzunligi (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="bino_uzunligi" Text="18" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="3,0">
+                        <TextBlock Text="Qadam (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="qadam" Text="6" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Margin="3,0">
+                        <TextBlock Text="Qavatlar:" Style="{StaticResource lbl}"/>
+                        <TextBox Name="qavatlar" Text="2" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" Margin="3,0">
+                        <TextBlock Text="Qavat b-ligi (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="qavat_balandligi" Text="3" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="5" Margin="3,0">
+                        <TextBlock Text="X boshlash (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="x_boshlash" Text="0" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="6" Margin="3,0">
+                        <TextBlock Text="Y boshlash (m):" Style="{StaticResource lbl}"/>
+                        <TextBox Name="y_boshlash" Text="0" Style="{StaticResource inp}"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- CHECKBOXLAR -->
+        <StackPanel Orientation="Horizontal" Margin="10,6">
+            <CheckBox Name="cb_fundament" Content="Fundament qur" IsChecked="True" Margin="0,0,20,0" FontSize="12"/>
+            <CheckBox Name="cb_osi" Content="Os chiziqlari" IsChecked="True" Margin="0,0,20,0" FontSize="12"/>
+            <CheckBox Name="cb_plita" Content="Perekritie qur" IsChecked="True" FontSize="12"/>
+        </StackPanel>
+
+        <!-- TUGMALAR -->
+        <Grid Margin="6,0,6,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="btn_qurish" Content="QURISH"
+                Height="38" Margin="3" FontSize="14" FontWeight="Bold"
+                Background="#2E4DA7" Foreground="White" Cursor="Hand"
+                Click="btn_qurish_Click"/>
+            <Button Grid.Column="1" Name="btn_spets" Content="SPETSIFIKATSIYA"
+                Height="38" Margin="3" FontSize="13" FontWeight="Bold"
+                Background="#217346" Foreground="White" Cursor="Hand"
+                Click="btn_spets_Click"/>
+            <Button Grid.Column="2" Name="btn_excel" Content="EXCEL EXPORT"
+                Height="38" Margin="3" FontSize="13" FontWeight="Bold"
+                Background="#D6742A" Foreground="White" Cursor="Hand"
+                Click="btn_excel_Click"/>
+            <Button Grid.Column="3" Name="btn_undo" Content="UNDO"
+                Height="38" Margin="3" FontSize="14" FontWeight="Bold"
+                Background="#C0392B" Foreground="White" Cursor="Hand"
+                Click="btn_undo_Click"/>
+        </Grid>
+
+        <!-- PROGRESS -->
+        <Border Margin="6,2,6,6" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="4" Padding="8,6" Background="White">
+            <StackPanel>
+                <ProgressBar Name="progress_bar" Height="18" Value="0" Maximum="100" Foreground="#2E4DA7" Background="#E8EFF8"/>
+                <TextBlock Name="status_txt" Text="Tayyor" FontSize="11" Foreground="#555555" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+    </StackPanel>
+</Window>
